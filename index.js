@@ -22,6 +22,9 @@ require('./db/connection')
 // variable to hold port number because it is dynamic
 const port = 3000 || process.env.PORT
 
+
+
+
 // run server
 server.listen(port,()=>{
     console.log(`server started working at port number: ${port}`);

@@ -85,7 +85,21 @@ exports.editProfile = async (req, res) => {
 
     try {
 
-        const existUsername = await users.findOne({ username: req.body.NewUsername })
+        if(NewUsername==username){
+
+            const sameUsername=await users.findOne({username})
+            if(sameUsername){
+                sameUsername.email=NewEmail
+                sameUsername.password=NewPassword
+
+                await sameUsername.save()
+                res.status(200).json(sameUsername)
+            }
+
+        }
+        else{
+
+            const existUsername = await users.findOne({ username: req.body.NewUsername })
 
         if (existUsername) {
             res.status(401).json('Username already taken')
@@ -108,6 +122,10 @@ exports.editProfile = async (req, res) => {
             }
 
         }
+
+        }
+
+        
 
 
 
